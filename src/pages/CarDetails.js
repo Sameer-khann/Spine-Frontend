@@ -45,23 +45,23 @@ const CarDetails = () => {
   // Handle form submission to update car
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting form...");
+    // console.log("Submitting form...");
 
     const data = new FormData();
     Object.keys(formData).forEach((key) => data.append(key, formData[key]));
     images.forEach((img) => data.append("images", img)); // Append images to FormData
 
     try {
-      console.log("Dispatching updateCar...");
+      // console.log("Dispatching updateCar...");
       const updatedCar = await dispatch(updateCar({ id, data })).unwrap();
-      console.log("Car updated successfully: ", updatedCar);
+      // console.log("Car updated successfully: ", updatedCar);
 
       toast.success("Car updated successfully!");
-      console.log("Navigating to homepage...");
+      // console.log("Navigating to homepage...");
       navigate("/"); // Ensure this runs after success
     } catch (err) {
       console.error("Error Updating Car:", err);
-      toast.error("Error updating car!");
+      // toast.error("Error updating car!");
     }
   };
 

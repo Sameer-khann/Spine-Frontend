@@ -20,8 +20,8 @@ const Home = () => {
   const carList = cars.cars || [];
 
   useEffect(() => {
-    if (user) {
-      // Fetch cars only if the user is logged in
+    if (user && user._id) {
+      // Fetch cars only if the user is logged in and has a userID
       dispatch(fetchCars());
     }
   }, [dispatch, user]);
@@ -102,18 +102,29 @@ const Home = () => {
           {loading && <p className="text-center text-lg text-gray-600">Loading cars...</p>}
           {error && <p className="text-center text-lg text-red-600">{error}</p>}
 
-          {/* Display filtered car cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8">
-            {filteredCars.length > 0 ? (
-              filteredCars.map((car) => <CarCard key={car._id} car={car} />)
-            ) : (
-              !loading && (
-                <p className="text-gray-600 col-span-full text-center">
-                  No cars found matching your search.
-                </p>
-              )
-            )}
-          </div>
+          {/* Display the cars or message if no cars exist */}
+          {carList.length > 0 ? (
+            <>
+              {/* Display filtered car cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8">
+                {filteredCars.length > 0 ? (
+                  filteredCars.map((car) => <CarCard key={car._id} car={car} />)
+                ) : (
+                  !loading && (
+                    <p className="text-gray-600 col-span-full text-center">
+                      No cars found matching your search.
+                    </p>
+                  )
+                )}
+              </div>
+            </>
+          ) : (
+            !loading && (
+              <p className="text-center text-lg text-gray-600">
+                Add cars to see them here. Click on the "+" button to add a new car.
+              </p>
+            )
+          )}
         </>
       ) : (
         <div className="text-center mt-10">
