@@ -54,7 +54,7 @@ const CarDetails = () => {
     try {
       // console.log("Dispatching updateCar...");
       const updatedCar = await dispatch(updateCar({ id, data })).unwrap();
-      // console.log("Car updated successfully: ", updatedCar);
+      console.log("Car updated successfully: ", updatedCar);
 
       toast.success("Car updated successfully!");
       // console.log("Navigating to homepage...");
