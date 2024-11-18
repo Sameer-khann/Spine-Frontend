@@ -19,7 +19,11 @@ const Navbar = () => {
       <Link to="/" className="text-lg font-bold">
         Car Management
       </Link>
-      <div>
+      <div className="flex space-x-4">
+        {/* Add Docs link */}
+        <Link to="/docs" className="text-lg font-bold hover:text-blue-200">
+          Docs
+        </Link>
         {user ? (
           <button
             className="bg-red-500 px-4 py-2 rounded"

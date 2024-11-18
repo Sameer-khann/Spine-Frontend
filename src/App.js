@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import CarDetails from "./pages/CarDetails";
+import DocsPage from "./pages/DocsPage"; // Import the DocsPage
 import { useDispatch } from "react-redux";
 import { performUserDetails } from "./redux/slices/authSlice"; // Make sure you import performUserDetails
 import { ToastContainer } from "react-toastify";
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Home />} />
+        <Route path="/docs" element={<DocsPage />} /> {/* Docs Route */}
         <Route path="/cars/:id" element={<CarDetails />} />
       </Routes>
     </Router>
