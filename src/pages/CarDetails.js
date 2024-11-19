@@ -15,9 +15,16 @@ const CarDetails = () => {
 
   // Fetch car by ID when the component mounts
   useEffect(() => {
-    if (id) {
-      dispatch(fetchCarById(id)); // Dispatch action to fetch car details
-    }
+    const fetchCar = async () => {
+      try {
+        if (id) {
+          await dispatch(fetchCarById(id)); // Fetch car details
+        }
+      } catch (err) {
+        console.error("Error fetching car details: ", err);
+      }
+    };
+    fetchCar();
   }, [dispatch, id]);
 
   // Once car is fetched, update formData with car details
@@ -54,7 +61,7 @@ const CarDetails = () => {
       console.log("Car updated successfully: ", updatedCar);
 
       // Use SweetAlert2 for success
-      Swal.fire({
+      await Swal.fire({
         icon: "success",
         title: "Car updated successfully!",
         confirmButtonText: "OK",
@@ -64,7 +71,7 @@ const CarDetails = () => {
     } catch (err) {
       console.error("Error Updating Car:", err);
       // Use SweetAlert2 for error
-      Swal.fire({
+      await Swal.fire({
         icon: "error",
         title: "Error updating car!",
         text: err.message,
@@ -74,25 +81,24 @@ const CarDetails = () => {
   };
 
   // Handle car deletion
-  const handleDelete = () => {
-    dispatch(deleteCar(id)) // Dispatch action to delete car
-      .then(() => {
-        // Use SweetAlert2 for success
-        Swal.fire({
-          icon: "success",
-          title: "Car deleted successfully!",
-          confirmButtonText: "OK",
-        });
-        navigate("/"); // Navigate back to homepage
-      })
-      .catch(() => {
-        // Use SweetAlert2 for error
-        Swal.fire({
-          icon: "error",
-          title: "Error deleting car!",
-          confirmButtonText: "OK",
-        });
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteCar(id)); // Dispatch action to delete car
+      // Use SweetAlert2 for success
+      await Swal.fire({
+        icon: "success",
+        title: "Car deleted successfully!",
+        confirmButtonText: "OK",
       });
+      navigate("/"); // Navigate back to homepage after deletion
+    } catch (err) {
+      // Use SweetAlert2 for error
+      await Swal.fire({
+        icon: "error",
+        title: "Error deleting car!",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   // Handle carousel navigation
