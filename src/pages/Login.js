@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../redux/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom"; // Import Link for navigation
+import { fetchCars } from "../redux/slices/carSlice";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "sameerkhann241@gmail.com", password: "password" });
