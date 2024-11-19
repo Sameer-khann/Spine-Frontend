@@ -69,13 +69,13 @@ export const { startLoading, setUser, setError, logout } = authSlice.actions;
 // };
 
 
-
+// https://spine-server.vercel.app
 
 // Login action
 export const login = (credentials) => async (dispatch) => {
   try {
     dispatch(startLoading());
-    const response = await axios.post("https://spine-server.vercel.app/api/auth/login", credentials, { withCredentials: true });
+    const response = await axios.post("https://spine-backend.onrender.com/api/auth/login", credentials, { withCredentials: true });
     dispatch(setUser(response.data));
   } catch (err) {
     dispatch(setError(err.response?.data?.message || "Login failed"));
@@ -86,7 +86,7 @@ export const login = (credentials) => async (dispatch) => {
 export const register = (data) => async (dispatch) => {
   try {
     dispatch(startLoading());
-    const response = await axios.post("https://spine-server.vercel.app/api/auth/signup", data, { withCredentials: true });
+    const response = await axios.post("https://spine-backend.onrender.com/api/auth/signup", data, { withCredentials: true });
     dispatch(setUser(response.data));
   } catch (err) {
     dispatch(setError(err.response?.data?.message || "Registration failed"));
@@ -95,7 +95,7 @@ export const register = (data) => async (dispatch) => {
 
 // Logout action
 export const performLogout = () => async (dispatch) => {
-  await axios.post("https://spine-server.vercel.app/api/auth/logout", {}, { withCredentials: true });
+  await axios.post("https://spine-backend.onrender.com/api/auth/logout", {}, { withCredentials: true });
   dispatch(logout());
 };
 
@@ -103,7 +103,7 @@ export const performLogout = () => async (dispatch) => {
 export const performUserDetails = () => async (dispatch) => {
   try {
     dispatch(startLoading());
-    const response = await axios.get("https://spine-server.vercel.app/api/auth/userDetails", { withCredentials: true });
+    const response = await axios.get("https://spine-backend.onrender.com/api/auth/userDetails", { withCredentials: true });
     dispatch(setUser(response.data)); // Set user details in state
   } catch (err) {
     dispatch(setError(err.response?.data?.message || "Failed to fetch user details"));

@@ -11,25 +11,25 @@ const initialState = {
 
 // Fetch all cars
 export const fetchCars = createAsyncThunk("cars/fetchCars", async () => {
-  const response = await axios.get("https://spine-server.vercel.app/api/cars");
+  const response = await axios.get("https://spine-backend.onrender.com/api/cars");
   return response.data;
 });
 
 // Fetch car by ID
 export const fetchCarById = createAsyncThunk("cars/fetchCarById", async (id) => {
-  const response = await axios.get(`https://spine-server.vercel.app/api/cars/${id}`);
+  const response = await axios.get(`https://spine-backend.onrender.com/api/cars/${id}`);
   return response.data;
 });
 
 // Add a new car
 export const addCar = createAsyncThunk("cars/addCar", async (carData) => {
-  const response = await axios.post("https://spine-server.vercel.app/api/cars", carData, { withCredentials: true, });
+  const response = await axios.post("https://spine-backend.onrender.com/api/cars", carData, { withCredentials: true, });
   return response.data;
 });
 
 // Update a car
 export const updateCar = createAsyncThunk("cars/updateCar", async ({ id, data }) => {
-  const response = await axios.put(`https://spine-server.vercel.app/api/cars/${id}`, data, {
+  const response = await axios.put(`https://spine-backend.onrender.com/api/cars/${id}`, data, {
     withCredentials: true,
   });
   // console.log("response -> data: ", response.data.car)
@@ -38,7 +38,7 @@ export const updateCar = createAsyncThunk("cars/updateCar", async ({ id, data })
 
 // Delete a car
 export const deleteCar = createAsyncThunk("cars/deleteCar", async (id) => {
-  await axios.delete(`https://spine-server.vercel.app/api/cars/${id}`);
+  await axios.delete(`https://spine-backend.onrender.com/api/cars/${id}`);
   // console.log("ID from delete request : ", id)
   return id;
 });
