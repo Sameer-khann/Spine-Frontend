@@ -17,7 +17,8 @@ const Login = () => {
     e.preventDefault();
     dispatch(login(credentials)) // Dispatch login action
       .then(() => {
-        navigate("/"); // Navigate after successful login
+        dispatch(fetchCars());// Navigate after successful login
+        navigate("/"); 
       })
       .catch((err) => {
         console.log(err);
