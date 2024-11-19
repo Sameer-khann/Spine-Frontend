@@ -24,7 +24,8 @@ const Home = () => {
       // Fetch cars only if the user is logged in and has a userID
       dispatch(fetchCars());
     }
-  }, [dispatch, user]);
+    }, [dispatch, user]);
+    // }, []);
 
   // Toggle the visibility of the Car Form
   const toggleCarForm = () => {
