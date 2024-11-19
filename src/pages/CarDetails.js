@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { fetchCarById, updateCar, deleteCar } from "../redux/slices/carSlice";
-import { toast } from "react-toastify";
+import Swal from "sweetalert2"; // Import SweetAlert2
 
 const CarDetails = () => {
   const { id } = useParams(); // Get car ID from URL
@@ -45,23 +45,31 @@ const CarDetails = () => {
   // Handle form submission to update car
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log("Submitting form...");
-
     const data = new FormData();
     Object.keys(formData).forEach((key) => data.append(key, formData[key]));
     images.forEach((img) => data.append("images", img)); // Append images to FormData
 
     try {
-      // console.log("Dispatching updateCar...");
       const updatedCar = await dispatch(updateCar({ id, data })).unwrap();
       console.log("Car updated successfully: ", updatedCar);
 
-      toast.success("Car updated successfully!");
-      // console.log("Navigating to homepage...");
+      // Use SweetAlert2 for success
+      Swal.fire({
+        icon: "success",
+        title: "Car updated successfully!",
+        confirmButtonText: "OK",
+      });
+
       navigate("/"); // Ensure this runs after success
     } catch (err) {
       console.error("Error Updating Car:", err);
-      // toast.error("Error updating car!");
+      // Use SweetAlert2 for error
+      Swal.fire({
+        icon: "error",
+        title: "Error updating car!",
+        text: err.message,
+        confirmButtonText: "OK",
+      });
     }
   };
 
@@ -69,11 +77,21 @@ const CarDetails = () => {
   const handleDelete = () => {
     dispatch(deleteCar(id)) // Dispatch action to delete car
       .then(() => {
-        toast.success("Car deleted successfully!");
+        // Use SweetAlert2 for success
+        Swal.fire({
+          icon: "success",
+          title: "Car deleted successfully!",
+          confirmButtonText: "OK",
+        });
         navigate("/"); // Navigate back to homepage
       })
       .catch(() => {
-        toast.error("Error deleting car!");
+        // Use SweetAlert2 for error
+        Swal.fire({
+          icon: "error",
+          title: "Error deleting car!",
+          confirmButtonText: "OK",
+        });
       });
   };
 
